@@ -1,0 +1,29 @@
+﻿@model Product_Management_System_NimapInfotech.Models.Product
+
+@{
+    ViewBag.Title = "Edit Product";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken() <!-- Include this token -->
+
+    @Html.HiddenFor(model => model.ProductId)
+
+    <div class="form-group">
+        <label for="ProductName">Product Name</label>
+        @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label for="CategoryId">Category</label>
+        @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "Select a category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+}

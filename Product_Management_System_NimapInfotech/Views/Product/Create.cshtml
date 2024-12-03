@@ -1,0 +1,32 @@
+﻿@model Product_Management_System_NimapInfotech.Models.Product
+
+@{
+    ViewBag.Title = "Create Product";
+}
+
+<h2>Create Product</h2>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label for="ProductName">Product Name</label>
+        @Html.TextBoxFor(model => model.ProductName, new { @class = "form-control", placeholder = "Enter product name" })
+        @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+
+
+    </div>
+
+    <div class="form-group">
+        <label for="CategoryId">Category</label>
+        @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "Select a category", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+        <p>
+            Don’t see your category? <a href="@Url.Action("Create", "Category")">Add a new category</a>.
+        </p>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+}
